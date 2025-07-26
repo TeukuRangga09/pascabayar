@@ -1,0 +1,710 @@
+:root{
+  --pc:#012970;
+  --pc-g:linear-gradient(135deg, #2563eb, #1e40af);
+  --bc:#f6f9ff;
+  --clr-abu:#EBEEF4;
+  --clr-abu-sc: #F5F7FA;
+}
+
+html {
+    scroll-behavior: smooth !important;
+}
+
+header{
+    transition:.5s ease-in-out;
+/*    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);*/
+    font-family: "Open Sans", sans-serif;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+}
+
+header .nav-item .nav-link{
+    transition:.3s ease-in-out;
+    color:#575B5F;
+}
+
+header .nav-item .nav-link:hover{
+    color:var(--bs-primary);
+}
+
+header .nav-item .nav-link.active{
+    color:var(--bs-primary);
+}
+
+header a img.f-logo{
+    width:25px !important;
+    height:25px;
+    padding-right:0rem;
+    margin-right:0rem;
+}
+
+header a span{
+    font-size: 26px;
+    font-weight: 700;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+}
+
+body {
+    font-family: "Open Sans", sans-serif; 
+    background: #f6f9ff;  
+    color: #444444;
+}
+
+.text-pc {
+    color: var(--pc)!important;
+}
+
+.bg-pc {
+    background-color: var(--pc)!important;
+}
+
+.border-pc {
+    border-color: var(--pc)!important;
+}
+
+.border-abu {
+    border-color: var(--clr-abu) !important;
+}
+.text-abu {
+    color: var(--clr-abu) !important;
+}
+.bg-abu {
+    background: var(--clr-abu) !important;
+}
+.border-abu-sc {
+    border-color: var(--clr-abu-sc) !important;
+}
+.text-abu-sc {
+    color: var(--clr-abu-sc) !important;
+}
+.bg-abu-sc {
+    background: var(--clr-abu-sc) !important;
+}
+
+.bg-bc{
+    background: var(--bc);
+}
+
+.text-bc{
+    color: var(--bc);
+}
+
+.border-bc{
+    border-color: var(--bc);
+}
+
+.bg-success-new {
+    background: #8CC051;
+}
+.bg-success-new-sc {
+    background: #A2CD74;
+}
+.bg-danger-new {
+    background: #DB4453;
+}
+.bg-danger-new-sc {
+    background: #E98391;
+}
+.bg-warning-new {
+    background: #FFA726;
+}
+.bg-warning-new-sc {
+    background: #FFC978;
+}
+.bg-info-new {
+    background: #29B6F6;
+}
+.bg-info-new-sc {
+    background: #80D8FF;
+}
+.text-success-new {
+    color: #28A745;
+}
+.text-success-new-sc {
+    color: #71DD37;
+}
+.text-danger-new {
+    color: #DC3545;
+}
+.text-danger-new-sc {
+    color: #FF6B7C;
+}
+.text-warning-new {
+    color: #FF9800;
+}
+.text-warning-new-sc {
+    color: #FFC978;
+}
+.text-info-new {
+    color: #29B6F6;
+}
+.text-info-new-sc {
+    color: #80D8FF;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #012970;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.section-ct input{
+      padding: .75rem 1rem!important;
+}
+
+.section-ct input.form-control.form-control-lg.card{
+    font-size:1em;
+    font-weight:600;
+    color:inherit;
+}
+
+.section-tagihan .form-select{
+    font-weight:600!important;
+    padding: 0.75rem 1.25rem;
+    display: flex!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;
+    justify-content:center!important;
+    align-content: center!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;
+}
+.step-indicator {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.step-item {
+  text-align: center;
+  position: relative;
+  flex: 1;
+}
+
+.step-circle {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 20px;
+  transition: all 0.4s ease-in-out;
+}
+
+.step-item .step-circle {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+.step-item.active .step-circle {
+  background: var(--bs-primary);
+  color: #fff;
+}
+
+.step-line {
+  height: 6px;
+  flex-grow: 1;
+  transition: all 0.4s ease-in-out;
+  background: #e9ecef;
+  border-radius: 3px;
+}
+
+.step-line.active {
+  background: linear-gradient(90deg, #0d6efd, #0b5ed7);
+}
+
+
+.card-dt.card{
+    border-radius:.75rem!important;
+}
+
+.card-dt.card .card-body{
+    padding:1.5rem 1rem 1.5rem 1rem;
+}
+
+.card-dt.card p{
+    line-height:2rem;
+    margin:0;
+    font-weight:600;
+}
+.card-dt.card p span{
+    line-height:1rem;
+    font-size:1rem;
+    font-weight:600;
+    margin:0 0 0 0;
+    padding:0;
+    display:;
+}
+
+
+.section-pembayaran .card ::-webkit-scrollbar {
+    width: 6px
+}
+
+.section-pembayaran .card ::-webkit-scrollbar:horizontal {
+    height: 4px
+}
+
+.section-pembayaran .card ::-webkit-scrollbar-track {
+    border-radius: 4px
+}
+
+.section-pembayaran .card ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #cdcdcd;
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 2px rgba(0,0,0,.5)
+}
+
+.section-pembayaran .card ::-webkit-scrollbar-thumb:hover {
+    background: #bdc3c7
+}
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*hero*/
+/* Hero Section */
+.hero {
+    padding: 100px 0 80px;
+    background: var(--bc);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-title {
+    color: var(--pc);
+}
+
+.rounded-75{
+    border-radius:.75rem !important;
+}
+
+
+
+/*
+    Start Section Layanan 
+*/
+
+.services-section {
+    padding: 5rem 0;
+}
+
+.service-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.service-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.service-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.service-card h3 {
+    color: #012970;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.service-card p {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+.service-link {
+    color: #2a5ee6;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.service-link:hover {
+    color: #1e40af;
+}
+
+/* Color Variations */
+.bg-primary {
+    background: #2a5ee6;
+}
+.bg-success {
+    background: #22c55e;
+}
+.bg-warning {
+    background: #f59e0b;
+}
+.bg-danger {
+    background: #ef4444;
+}
+.bg-info {
+    background: #3b82f6;
+}
+.bg-secondary {
+    background: #64748b;
+}
+
+@media (max-width: 768px) {
+    .service-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/*End Layanan*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*Section Kalkulator Tagihan*/
+.calculator-section {
+    padding: 5rem 0;
+}
+
+.calculator-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+ 
+.calculator-section .input-label {
+    font-weight: 600;
+    color: #1e293b;
+    align-content: center;
+}
+
+.calculator-section .form-select {
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+}
+
+.calculator-section .tarif-info-card {
+    background: #f1f5f9;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.calculator-section .info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.calculator-section .result-card {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    height: 100%;
+}
+
+.calculator-section .breakdown {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.calculator-section .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.calculator-section .total-amount {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+   .calculator-section .total-amount {
+        font-size: 1.75rem;
+    }
+}
+
+/*End Kalkulator Tagihan*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*Start Section Tarif*/
+
+/* Tariff Section Styles */
+.tariff-section {
+    padding: 5rem 0;
+}
+
+.section-header {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #012970;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.last-update {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.rate-table-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.table-title {
+    color: #012970;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.tariff-table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: #f8f9ff;
+}
+
+.tariff-table thead th {
+    background: #2a5ee6;
+    color: white;
+    border-bottom: none;
+}
+
+.tariff-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.tariff-table tbody tr:hover {
+    background: #f1f5f9;
+}
+
+.rate-notes {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #f8f9ff;
+    border-radius: 0.5rem;
+}
+
+.note-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: #64748b;
+}
+
+.nav-pills .nav-link {
+    border: 2px solid #e2e8f0;
+    margin: 0 0.5rem;
+    border-radius: 0.75rem;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link.active {
+    background: #2a5ee6;
+    color: white;
+    border-color: #2a5ee6;
+}
+
+.info-card {
+    background: #fff3e8;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex; /* Menggunakan Flexbox */
+    align-items: center; /* Menyelaraskan elemen secara vertikal */
+    gap: 1rem; /* Jarak antar elemen */
+    border-left: 4px solid #f59e0b;
+}
+
+.info-card i {
+    font-size: 1.5rem;
+    color: #f59e0b;
+    flex-shrink: 0; /* Mencegah ikon menyusut */
+}
+
+.info-card h4,
+.info-card p {
+    margin: 0; /* Menghapus margin default */
+    line-height: 1.5; /* Menyamakan tinggi baris teks */
+}
+
+.info-card .content {
+    display: flex; /* Menggunakan Flexbox untuk konten teks */
+    flex-direction: column; /* Menyusun teks secara vertikal */
+    justify-content: center; /* Menyelaraskan teks secara vertikal */
+    flex-grow: 1; /* Memastikan konten teks mengisi ruang yang tersedia */
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .nav-pills .nav-link {
+        width: 100%;
+        margin: 0.25rem 0;
+    }
+}
+/*End Section Tarif*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*Section Contact*/
+.contact-section {
+    padding: 5rem 0;
+}
+
+.contact-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-section .form-control {
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.contact-section .form-control:focus {
+    border-color: #2a5ee6;
+    box-shadow: none;
+}
+
+.contact-info-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    height: 100%;
+    /*    box-shadow: 0 10px 30px rgba(0,0,0,0.05);*/
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.info-item {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-icon i {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.info-content h4 {
+    color: #012970;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.info-content p {
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: #2a5ee6;
+    color: white;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .info-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-icon {
+        margin: 0 auto;
+    }
+}
+
+/*End Section Contact*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/

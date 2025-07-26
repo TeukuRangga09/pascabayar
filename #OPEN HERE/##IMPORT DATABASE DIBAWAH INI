@@ -1,0 +1,4 @@
+IMPORT DATABASE:
+
+buat database baru dan berikan nama `pln_pascabayar`
+lalu import file `pln_pascabayar.sql`. 

@@ -1,0 +1,389 @@
+//Controller 
+
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Penggunaan_Backend extends CI_Controller {
+
+    const LOGIN_URL = 'backend/Auth/login';
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('backend/Penggunaan_Model_Backend', 'penggunaan_model');
+        // Cek apakah pengguna sudah login
+        if (!$this->session->userdata('backend_session_login')) {
+            redirect(self::LOGIN_URL);
+        }
+    }
+
+    // Halaman utama untuk menampilkan data penggunaan
+    public function index() {
+        $data['title'] = 'Data Penggunaan';
+        $data['user'] = $this->session->userdata();
+        $data['penggunas'] = $this->penggunaan_model->get_all_penggunas();
+        $data['pelanggans'] = $this->penggunaan_model->get_all_pelanggans();
+        $this->load->view('backend/template/backend_header', $data);
+        $this->load->view('backend/penggunaan/halaman_penggunaan', $data);
+        $this->load->view('backend/template/backend_footer');
+    }
+
+    // Menyimpan data penggunaan baru
+    public function create() {
+        // Set rules untuk validasi form
+        $this->form_validation->set_rules('id_pelanggan', 'Pelanggan', 'required');
+        $this->form_validation->set_rules('bulan', 'Bulan', 'required');
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required|numeric');
+        $this->form_validation->set_rules('meter_awal', 'Meter Awal', 'required|numeric');
+        $this->form_validation->set_rules('meter_akhir', 'Meter Akhir', 'required|numeric|greater_than_equal_to[' . $this->input->post('meter_awal') . ']');
+
+        // Set pesan validasi kustom
+        $this->form_validation->set_message('required', '{field} wajib diisi.');
+        $this->form_validation->set_message('numeric', '{field} harus berupa angka.');
+        $this->form_validation->set_message('greater_than_equal_to', '{field} harus lebih besar atau sama dengan Meter Awal.');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+        } else {
+            $data = [
+                'id_pelanggan' => $this->input->post('id_pelanggan'),
+                'bulan' => $this->input->post('bulan'),
+                'tahun' => $this->input->post('tahun'),
+                'meter_awal' => $this->input->post('meter_awal'),
+                'meter_akhir' => $this->input->post('meter_akhir')
+            ];
+
+            if ($this->penggunaan_model->insert_penggunaan($data)) {
+                $this->session->set_flashdata('success', 'Data penggunaan berhasil ditambahkan.');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal menambahkan data penggunaan.');
+            }
+        }
+        redirect('backend/penggunaan');
+    }
+
+    // Mengupdate data penggunaan
+    public function update($id_penggunaan) {
+        // Set rules untuk validasi form
+        $this->form_validation->set_rules('id_pelanggan', 'Pelanggan', 'required');
+        $this->form_validation->set_rules('bulan', 'Bulan', 'required');
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required|numeric');
+        $this->form_validation->set_rules('meter_awal', 'Meter Awal', 'required|numeric');
+        $this->form_validation->set_rules('meter_akhir', 'Meter Akhir', 'required|numeric|greater_than_equal_to[' . $this->input->post('meter_awal') . ']');
+
+        // Set pesan validasi kustom
+        $this->form_validation->set_message('required', '{field} wajib diisi.');
+        $this->form_validation->set_message('numeric', '{field} harus berupa angka.');
+        $this->form_validation->set_message('greater_than_equal_to', '{field} harus lebih besar atau sama dengan Meter Awal.');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+        } else {
+            $data = [
+                'id_pelanggan' => $this->input->post('id_pelanggan'),
+                'bulan' => $this->input->post('bulan'),
+                'tahun' => $this->input->post('tahun'),
+                'meter_awal' => $this->input->post('meter_awal'),
+                'meter_akhir' => $this->input->post('meter_akhir')
+            ];
+
+            if ($this->penggunaan_model->update_penggunaan($id_penggunaan, $data)) {
+                $this->session->set_flashdata('success', 'Data penggunaan berhasil diperbarui.');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal memperbarui data penggunaan.');
+            }
+        }
+        redirect('backend/penggunaan');
+    }
+
+    // Menghapus data penggunaan
+    public function delete($id_penggunaan) {
+        if ($this->penggunaan_model->delete_penggunaan($id_penggunaan)) {
+            $this->session->set_flashdata('success', 'Data penggunaan berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menghapus data penggunaan.');
+        }
+        redirect('backend/penggunaan');
+    }
+}
+
+
+//Model 
+
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Penggunaan_Model_Backend extends CI_Model {
+
+    protected $table = 'penggunaan';
+
+    // Mendapatkan semua data penggunaan
+    public function get_all_penggunas() {
+        $this->db->select('penggunaan.*, pelanggan.nama_pelanggan');
+        $this->db->join('pelanggan', 'penggunaan.id_pelanggan = pelanggan.id_pelanggan', 'left');
+        return $this->db->get($this->table)->result_array();
+    }
+
+    // Mendapatkan semua data pelanggan
+    public function get_all_pelanggans() {
+        return $this->db->get('pelanggan')->result_array();
+    }
+
+    // Menambahkan data penggunaan baru
+    public function insert_penggunaan($data) {
+        return $this->db->insert($this->table, $data);
+    }
+
+    // Mengupdate data penggunaan berdasarkan id_penggunaan
+    public function update_penggunaan($id_penggunaan, $data) {
+        $this->db->where('id_penggunaan', $id_penggunaan);
+        return $this->db->update($this->table, $data);
+    }
+
+    // Menghapus data penggunaan berdasarkan id_penggunaan
+    public function delete_penggunaan($id_penggunaan) {
+        $this->db->where('id_penggunaan', $id_penggunaan);
+        return $this->db->delete($this->table);
+    }
+}
+
+
+
+//Views
+<!-- Main Content -->
+<main id="main" class="main">
+    <!-- Page Title -->
+    <div class="pagetitle">
+        <h1>Data Penggunaan</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= base_url('backend/Dashboard'); ?>">Home</a></li>
+                <li class="breadcrumb-item active">Data Penggunaan</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Flash Messages -->
+    <?php if ($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <?= $this->session->flashdata('success'); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('error')) : ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <?= str_replace('<p>', '', str_replace('</p>', '', $this->session->flashdata('error'))); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
+    <!-- Section -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Card Title and Description -->
+                        <h5 class="card-title">Daftar Penggunaan</h5>
+                        <p>
+                            Berikut adalah daftar penggunaan listrik yang tersedia dalam sistem.
+                        </p>
+
+                        <!-- Button Tambah Penggunaan Baru -->
+                        <button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
+                            <i class="bi bi-plus" aria-hidden="true"></i>
+                            <span class="ms-1">Tambah Penggunaan Baru</span>
+                        </button>
+
+                        <!-- Table with Stripped Rows -->
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered datatable">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-start text-nowrap">Nama Pelanggan</th>
+                                        <th class="text-start text-nowrap">Bulan</th>
+                                        <th class="text-start text-nowrap">Tahun</th>
+                                        <th class="text-start text-nowrap">Meter Awal</th>
+                                        <th class="text-start text-nowrap">Meter Akhir</th>
+                                        <?php if (($user['level'] ?? '') === 'Administrator'): ?>
+                                            <th scope="col" class="text-center">Aksi</th>
+                                        <?php endif; ?>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($penggunas)) : ?>
+                                        <?php $no = 1; foreach ($penggunas as $pengguna) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $no++; ?></td>
+                                                <td class="text-start text-nowrap"><?= htmlspecialchars($pengguna['nama_pelanggan']); ?></td>
+                                                <td class="text-start text-nowrap"><?= htmlspecialchars($pengguna['bulan']); ?></td>
+                                                <td class="text-start text-nowrap"><?= htmlspecialchars($pengguna['tahun']); ?></td>
+                                                <td class="text-start text-nowrap"><?= format_kwh($pengguna['meter_awal']); ?> kWh</td>
+                                                <td class="text-start text-nowrap"><?= format_kwh($pengguna['meter_akhir']); ?> kWh</td>
+                                                <?php if (($user['level'] ?? '') === 'Administrator'): ?>
+                                                    <td class="text-center p-0">
+                                                        <!-- Button Group -->
+                                                        <div class="btn-group mt-lg-1" role="group" aria-label="Actions">
+                                                            <!-- Tombol Edit (Modal) -->
+                                                            <button type="button" class="btn btn-outline-custom-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $pengguna['id_penggunaan'] ?>">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </button>
+                                                            <!-- Tombol Hapus (Modal) -->
+                                                            <button type="button" class="btn btn-outline-custom-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $pengguna['id_penggunaan'] ?>">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                <?php endif; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End Table with Stripped Rows -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal Tambah -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="<?= base_url('backend/Penggunaan_Backend/create'); ?>" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Tambah Penggunaan Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Pelanggan Field -->
+                    <div class="mb-3">
+                        <label for="id_pelanggan" class="form-label">Pelanggan</label>
+                        <select id="id_pelanggan" name="id_pelanggan" class="form-control" required>
+                            <option value="">Pilih Pelanggan</option>
+                            <?php foreach ($pelanggans as $pelanggan) : ?>
+                                <option value="<?= $pelanggan['id_pelanggan']; ?>"><?= htmlspecialchars($pelanggan['nama_pelanggan']); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <!-- Bulan Field -->
+                    <div class="mb-3">
+                        <label for="bulan" class="form-label">Bulan</label>
+                        <select id="bulan" name="bulan" class="form-control" required>
+                            <option value="">Pilih Bulan</option>
+                            <?php foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $bulan) : ?>
+                                <option value="<?= $bulan; ?>"><?= $bulan; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <!-- Tahun Field -->
+                    <div class="mb-3">
+                        <label for="tahun" class="form-label">Tahun</label>
+                        <input type="number" id="tahun" name="tahun" class="form-control" required>
+                    </div>
+
+                    <!-- Meter Awal Field -->
+                    <div class="mb-3">
+                        <label for="meter_awal" class="form-label">Meter Awal</label>
+                        <input type="number" step="1" id="meter_awal" name="meter_awal" class="form-control" required>
+                    </div>
+
+                    <!-- Meter Akhir Field -->
+                    <div class="mb-3">
+                        <label for="meter_akhir" class="form-label">Meter Akhir</label>
+                        <input type="number" step="1" id="meter_akhir" name="meter_akhir" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit -->
+<?php foreach ($penggunas as $pengguna) : ?>
+    <div class="modal fade" id="editModal<?= $pengguna['id_penggunaan']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="<?= base_url('backend/Penggunaan_Backend/update/' . $pengguna['id_penggunaan']); ?>" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Penggunaan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="id_pelanggan" class="form-label">Pelanggan</label>
+                            <select name="id_pelanggan" class="form-control" required>
+                                <option value="">Pilih Pelanggan</option>
+                                <?php foreach ($pelanggans as $pelanggan) : ?>
+                                    <option value="<?= $pelanggan['id_pelanggan']; ?>" <?= ($pelanggan['id_pelanggan'] == $pengguna['id_pelanggan']) ? 'selected' : ''; ?>>
+                                        <?= htmlspecialchars($pelanggan['nama_pelanggan']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bulan" class="form-label">Bulan</label>
+                            <select name="bulan" class="form-control" required>
+                                <option value="">Pilih Bulan</option>
+                                <?php foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $bulan) : ?>
+                                    <option value="<?= $bulan; ?>" <?= ($bulan == $pengguna['bulan']) ? 'selected' : ''; ?>>
+                                        <?= $bulan; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <input type="number" name="tahun" class="form-control" value="<?= htmlspecialchars($pengguna['tahun']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="meter_awal" class="form-label">Meter Awal</label>
+                            <input type="number" step="1" name="meter_awal" class="form-control" value="<?= format_kwh($pengguna['meter_awal']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="meter_akhir" class="form-label">Meter Akhir</label>
+                            <input type="number" step="1" name="meter_akhir" class="form-control" value="<?= format_kwh($pengguna['meter_akhir']); ?>" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<!-- Modal Hapus -->
+<?php foreach ($penggunas as $pengguna) : ?>
+    <div class="modal fade" id="deleteModal<?= $pengguna['id_penggunaan']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Penghapusan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus data penggunaan untuk pelanggan <strong><?= htmlspecialchars($pengguna['nama_pelanggan']); ?></strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <a href="<?= base_url('backend/Penggunaan_Backend/delete/' . $pengguna['id_penggunaan']); ?>" class="btn btn-danger">Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

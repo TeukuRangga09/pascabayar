@@ -1,0 +1,151 @@
+:root{
+  --backend-primary-color:#012970;
+  --backend-secondary-color:#DEE2E6;
+  --backend-default-color:#212529;
+  --backend-white-color: #fff;
+}
+
+/* 
+** Datatable Header **
+*/
+#dt-length-0:focus,
+#dt-length-0:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--backend-primary-color) !important; 
+}
+
+#dt-search-0:focus,
+#dt-search-0:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--backend-primary-color) !important; 
+}
+
+div.dt-container.dt-bootstrap5.dt-empty-footer div#row-1 {
+    margin-bottom: 1rem;
+}
+
+div.dt-buttons.btn-group.flex-wrap{
+  float:left;
+}
+
+div.dt-buttons .btn.btn-secondary{
+  background-color:white;
+  color:var(--backend-default-color-color);
+  border:1px solid var(--backend-secondary-color);
+  font-size:11px;
+  font-weight:500;
+}
+
+div.dt-buttons .btn.btn-secondary:hover,div.dt-buttons .btn.btn-secondary:active{
+  background-color:var(--backend-primary-color);
+  color:white;
+  border:1px solid var(--backend-primary-color);
+  box-shadow:var(--bs-box-shadow);
+}
+
+/* 
+** Datatable Isi Table **
+*/
+div.dt-container.dt-bootstrap5.dt-empty-footer div#row-2 {
+  /* border:1px solid var(--backend-secondary-color); */
+}
+
+.table.datatable.dataTable.dtr-inline{
+  border:1px solid var(--backend-secondary-color);
+}
+
+/* 
+** Datatable Footer **
+*/
+
+/* Hilangkan outline dan box-shadow saat focus atau active */
+.dt-paging .page-link:focus,
+.dt-paging .page-link:active {
+    outline: none !important; /* Hilangkan outline */
+    box-shadow: none !important; /* Hilangkan box-shadow */
+    border-color: #dee2e6 !important; /* Opsional: Sesuaikan warna border */
+}
+
+/* Tambahkan styling tambahan untuk tombol pagination aktif */
+.dt-paging .page-item.active .page-link {
+    background-color: var(--bs-primary) !important; /* Warna latar belakang tombol aktif */
+    border-color: transparent !important; /* Warna border tombol aktif */
+    color: var(--bs-white) !important; /* Warna teks tombol aktif */
+}
+
+/* Styling untuk tombol pagination disabled */
+.dt-paging .page-item.disabled .page-link {
+    background-color: #f8f9fa !important; /* Warna latar belakang tombol disabled */
+    border-color: #dee2e6 !important; /* Warna border tombol disabled */
+    color: #6c757d !important; /* Warna teks tombol disabled */
+    cursor: not-allowed; /* Indikator bahwa tombol tidak dapat diklik */
+}
+
+div.dt-container.dt-bootstrap5.dt-empty-footer div#row-3 {
+    margin-top: 1rem;
+}
+
+div#row-3 div.dt-paging{
+  float:right;
+}
+
+div.dt-container.dt-bootstrap5.dt-empty-footer div#row-4 {
+    margin-top: 1rem;
+}
+
+div#row-4 div.dt-paging{
+  float:right;
+}
+
+.section-table div.dt-container.dt-bootstrap5.dt-empty-footer div#row-5 {
+    margin-top: 1rem;
+}
+
+.section-table div#row-5 div.dt-paging{
+  float:right;
+}
+
+
+/* Default style untuk semua ukuran layar */
+.apexcharts-toolbar {
+    top: -50px !important;
+    right: 3px !important;
+}
+
+/* Style khusus untuk ukuran small (sm) di Bootstrap 5 */
+@media (max-width: 576px) {
+    .apexcharts-toolbar {
+/*        top: -46px !important;*/
+        display: none !important;
+    }
+}
+
+span.fs-4.fw-bold.mb-1 {
+    font-family: 'Open Sans';
+}
+
+.hak-akses p.badge {
+    padding: 7px;
+    border-radius:5px !important;
+}
+.hak-akses p {
+    font-family:poppins;
+    font-size:14px;
+    font-weight:500;
+}
+.hak-akses .bg-danger{
+    border-color:#B2BED4 !important;
+    background-color:transparent !important;
+    color:#012970;
+    border:1px solid;
+    transition:1s;
+}
+
+.hak-akses .bg-danger:hover{
+    background-color:#012970 !important;
+    border-color:#012970;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    color:white;
+}

@@ -1,0 +1,18 @@
+1. Sumber Tarif Listrik
+https://www.aslinews.id/ekonomi/98843265/desember-2024-ini-besar-tarif-listrik-pln-sejak-oktober-desember-2024-dari-tarif-rumah-tangga-bisnis-industri-hingga-kantor-pemerintahan
+
+INSERT INTO `tarif` (`daya`, `tarifperkwh`, `deskripsi`) VALUES
+('450 VA', 415.00, 'Tarif untuk pelanggan rumah tangga dengan daya 450 VA'),
+('900 VA', 1352.00, 'Tarif untuk pelanggan rumah tangga dengan daya 900 VA'),
+('1300 VA', 1444.70, 'Tarif untuk pelanggan rumah tangga dengan daya 1300 VA'),
+('2200 VA', 1444.70, 'Tarif untuk pelanggan rumah tangga dengan daya 2200 VA'),
+('3500-5500 VA', 1699.53, 'Tarif untuk pelanggan rumah tangga dengan daya 3500 hingga 5500 VA'),
+('6600 VA ke atas', 1699.53, 'Tarif untuk pelanggan rumah tangga dengan daya 6600 VA ke atas'),
+('Bisnis 6600 s.d 200 kVA', 1444.70, 'Tarif untuk pelanggan bisnis dengan daya 6600 VA hingga 200 kVA'),
+('Bisnis di atas 200 kVA', 1035.78, 'Tarif untuk pelanggan bisnis dengan daya di atas 200 kVA'),
+('Industri di atas 200 kVA', 1035.78, 'Tarif untuk pelanggan industri dengan daya di atas 200 kVA'),
+('Kantor Pemerintah 6600 s.d 200 kVA', 1444.70, 'Tarif untuk kantor pemerintah dengan daya 6600 VA hingga 200 kVA'),
+('Kantor Pemerintah di atas 200 kVA', 1035.78, 'Tarif untuk kantor pemerintah dengan daya di atas 200 kVA');
+
+
+
