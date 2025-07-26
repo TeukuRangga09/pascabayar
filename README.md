@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Aplikasi Pembayaran Listrik Pascabayar
 
@@ -74,3 +75,7 @@ Proyek ini bebas digunakan untuk kebutuhan pembelajaran, tugas akhir, atau penge
 ---
 
 *Terima kasih telah menggunakan aplikasi ini!*
+=======
+# pascabayar
+Tugas Serkom Skema Analisis Program
+>>>>>>> 300b734e7d6bacd16c987181d5659079dfe00316
