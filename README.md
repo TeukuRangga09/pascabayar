@@ -33,7 +33,7 @@ File SQL tersedia: `pln_pascabayar.sql`
 
 1. **Clone repository atau unduh ZIP**
     ```bash
-    git clone https://github.com/username/Aplikasi-Pembayaran-Listrik-Pascabayar.git
+    git clone https://github.com/TeukuRangga09/pascabayar
     ```
 
 2. **Import database**
@@ -59,10 +59,9 @@ File SQL tersedia: `pln_pascabayar.sql`
 | Role    | Username | Password |
 |---------|----------|----------|
 | Admin   | admin    | admin    |
-| Petugas | petugas1 | 123456   |
-| Agen    | agen1    | agen123  |
+| Petugas | petugas  | petugas  |
 
-*Catatan: Data login bisa diubah di tabel `user`, `petugas`, atau `agen`.*
+*Catatan: Data login bisa diubah di tabel `user`
 
 ## 👨‍💻 Kontributor
 
