@@ -65,7 +65,7 @@ File SQL tersedia: `pln_pascabayar.sql`
 
 ## 👨‍💻 Kontributor
 
-- Teuku Rangga — Backend & Database
+- Teuku Rangga — Frontend & Database
 
 ## 📄 Lisensi
 
